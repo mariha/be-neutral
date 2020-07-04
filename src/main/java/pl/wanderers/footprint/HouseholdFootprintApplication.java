@@ -4,6 +4,9 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+import pl.wanderers.footprint.health.TemplateHealthCheck;
+import pl.wanderers.footprint.resources.HelloWorldResource;
+
 public class HouseholdFootprintApplication extends Application<HouseholdFootprintConfiguration> {
 
     public static void main(final String[] args) throws Exception {
@@ -12,7 +15,7 @@ public class HouseholdFootprintApplication extends Application<HouseholdFootprin
 
     @Override
     public String getName() {
-        return "Household Footprint";
+        return "hello-world";
     }
 
     @Override
@@ -23,7 +26,12 @@ public class HouseholdFootprintApplication extends Application<HouseholdFootprin
     @Override
     public void run(final HouseholdFootprintConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        final HelloWorldResource resource = new HelloWorldResource(
+                configuration.getTemplate(), configuration.getDefaultName());
+        environment.jersey().register(resource);
+
+        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
+        environment.healthChecks().register("template", healthCheck);
     }
 
 }

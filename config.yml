@@ -1,4 +1,36 @@
+template: Hello, %s!
+defaultName: Stranger
+
+server:
+  rootPath: /api/v1
+  requestLog:
+    appenders:
+      - type: console
+      - type: file
+        # roll-over daily and retain for 7 days
+        currentLogFilename: ./logs/requests.log
+        archivedLogFilenamePattern: ./logs/requests-%d.log.gz
+        archivedFileCount: 7
+
 logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
   level: INFO
+
+  # Logger-specific levels.
   loggers:
+    # Sets the level for 'pl.wanderers.footprint' to DEBUG.
     pl.wanderers.footprint: DEBUG
+
+  # Logback's Time Based Rolling Policy - archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}.log.gz
+  # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
+  # Logback's Fixed Window Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%i.log.gz
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: /logs/application.log
+      archivedLogFilenamePattern: /logs/application-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MiB
