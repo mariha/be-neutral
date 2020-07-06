@@ -5,7 +5,7 @@ import io.dropwizard.Configuration;
 
 import javax.validation.constraints.NotEmpty;
 
-public class HouseholdFootprintConfiguration extends Configuration {
+public class BeNeutralConfiguration extends Configuration {
     @NotEmpty
     private String template;
 

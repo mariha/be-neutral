@@ -7,12 +7,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.wanderers</groupId>
-    <artifactId>household-footprint</artifactId>
+    <artifactId>be-neutral</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Household Footprint</name>
-    <description>A platform to calculate co2 emission for a household, advice how to reduce it and how to offset the rest. The goal is for a
+    <name>BeNeutral</name>
+    <description>A tool to calculate co2 emission for a house, advise how to reduce it and how to offset the rest. The goal is for a
         household to achieve and maintain carbon-neutrality.
     </description>
 
@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.0.10</dropwizard.version>
-        <mainClass>pl.wanderers.footprint.HouseholdFootprintApplication</mainClass>
+        <mainClass>pl.wanderers.footprint.BeNeutralApplication</mainClass>
     </properties>
 
     <dependencyManagement>

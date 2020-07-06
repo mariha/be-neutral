@@ -7,10 +7,10 @@ import io.dropwizard.setup.Environment;
 import pl.wanderers.footprint.health.TemplateHealthCheck;
 import pl.wanderers.footprint.resources.HelloWorldResource;
 
-public class HouseholdFootprintApplication extends Application<HouseholdFootprintConfiguration> {
+public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
 
     public static void main(final String[] args) throws Exception {
-        new HouseholdFootprintApplication().run(args);
+        new BeNeutralApplication().run(args);
     }
 
     @Override
@@ -19,12 +19,12 @@ public class HouseholdFootprintApplication extends Application<HouseholdFootprin
     }
 
     @Override
-    public void initialize(final Bootstrap<HouseholdFootprintConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<BeNeutralConfiguration> bootstrap) {
         // TODO: application initialization
     }
 
     @Override
-    public void run(final HouseholdFootprintConfiguration configuration,
+    public void run(final BeNeutralConfiguration configuration,
                     final Environment environment) {
         final HelloWorldResource resource = new HelloWorldResource(
                 configuration.getTemplate(), configuration.getDefaultName());
