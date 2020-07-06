@@ -1,7 +1,6 @@
-[![CircleCI](https://circleci.com/gh/mariha/household-footprint.svg?style=svg&circle-token=54788ca69527fe3e9a550d3cf749c57ed96f5200)](https://circleci.com/gh/mariha/household-footprint)
-
-Household Footprint
+BeNeutral
 ================
+[![CircleCI](https://circleci.com/gh/mariha/be-neutral.svg?style=shield&circle-token=54788ca69527fe3e9a550d3cf749c57ed96f5200)](https://circleci.com/gh/mariha/be-neutral)
 
 A tool to calculate CO2 emitted by a house, advise how to reduce it, and encourages to offset the rest by planting trees.
 
