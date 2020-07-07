@@ -17,10 +17,11 @@
     </description>
 
     <properties>
+        <mainClass>pl.wanderers.footprint.BeNeutralApplication</mainClass>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.0.10</dropwizard.version>
-        <mainClass>pl.wanderers.footprint.BeNeutralApplication</mainClass>
     </properties>
 
     <dependencyManagement>

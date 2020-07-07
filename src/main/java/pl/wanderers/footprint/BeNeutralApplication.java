@@ -26,11 +26,10 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
     @Override
     public void run(final BeNeutralConfiguration configuration,
                     final Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource(
-                configuration.getTemplate(), configuration.getDefaultName());
+        final HelloWorldResource resource = new HelloWorldResource(configuration.buildTemplate());
         environment.jersey().register(resource);
 
-        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
+        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.buildTemplate());
         environment.healthChecks().register("template", healthCheck);
     }
 

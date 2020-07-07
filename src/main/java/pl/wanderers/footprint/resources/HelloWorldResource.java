@@ -12,24 +12,22 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import pl.wanderers.footprint.api.Greetings;
+import pl.wanderers.footprint.core.Template;
 
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
-    private final String template;
-    private final String defaultName;
+    private final Template template;
     private final AtomicLong counter;
 
-    public HelloWorldResource(String template, String defaultName) {
+    public HelloWorldResource(Template template) {
         this.template = template;
-        this.defaultName = defaultName;
         this.counter = new AtomicLong();
     }
 
     @GET
     @Timed
     public Greetings sayHello(@QueryParam("name") @Nullable String name) {
-        final String value = String.format(template, Optional.ofNullable(name).orElse(defaultName));
-        return new Greetings(counter.incrementAndGet(), value);
+        return new Greetings(counter.incrementAndGet(), template.render(Optional.ofNullable(name)));
     }
 }

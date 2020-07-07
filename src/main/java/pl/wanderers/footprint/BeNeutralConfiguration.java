@@ -5,6 +5,8 @@ import io.dropwizard.Configuration;
 
 import javax.validation.constraints.NotEmpty;
 
+import pl.wanderers.footprint.core.Template;
+
 public class BeNeutralConfiguration extends Configuration {
     @NotEmpty
     private String template;
@@ -20,6 +22,10 @@ public class BeNeutralConfiguration extends Configuration {
     @JsonProperty
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    public Template buildTemplate() {
+        return new Template(template, defaultName);
     }
 
     @JsonProperty
