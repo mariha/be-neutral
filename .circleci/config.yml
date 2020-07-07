@@ -36,6 +36,13 @@ jobs:
       # Run tests!
       - run: mvn package
 
+      - store_test_results:
+          path: target/test-results
+
+      - store_artifacts:
+          name: Storing test results
+          path: target/test-results
+          destination: test-results
       - store_artifacts:
           name: Storing logs
           path: logs

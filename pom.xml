@@ -18,6 +18,7 @@
 
     <properties>
         <mainClass>pl.wanderers.footprint.BeNeutralApplication</mainClass>
+        <testResults>${project.build.directory}/test-results</testResults>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,6 +26,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <dropwizard.version>2.0.10</dropwizard.version>
+        <junit5.version>5.6.2</junit5.version>
     </properties>
 
     <dependencyManagement>
@@ -43,6 +45,22 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -88,6 +106,13 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <reportsDirectory>${testResults}</reportsDirectory>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
