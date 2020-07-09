@@ -3,12 +3,11 @@ defaultName: Stranger
 
 # Logging settings.
 logging:
-  level: INFO
+  level: DEBUG
   appenders:
     - type: console
+      threshold: INFO
     - type: file
       currentLogFilename: './logs/application.log'
-      archivedLogFilenamePattern: './logs/application-%d-%i.log.gz'
-      archive: true
+      archivedLogFilenamePattern: './logs/application-%d.log.gz'
       archivedFileCount: 7
-      maxFileSize: '1MiB'

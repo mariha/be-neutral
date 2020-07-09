@@ -18,19 +18,32 @@ logging:
 
   # Logger-specific levels.
   loggers:
-    # Sets the level for 'pl.wanderers.footprint' to DEBUG.
+    # Permit debug, info, warn and error messages to be logged by appenders.
     pl.wanderers.footprint: DEBUG
 
   # Logback's Time Based Rolling Policy - archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}.log.gz
   # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
   # Logback's Fixed Window Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%i.log.gz
   appenders:
+    # Log warnings and errors to stderr
     - type: console
+      threshold: WARN
+      target: stderr
+
+    # Log info, warnings and errors to our apps' main log.
+    # Rolled over daily and retained for 7 days.
     - type: file
       threshold: INFO
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
       currentLogFilename: /logs/application.log
       archivedLogFilenamePattern: /logs/application-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
-      timeZone: UTC
       maxFileSize: 10MiB
+
+    # Log debug messages, info, warnings and errors to our apps' debug log.
+    # Rolled over hourly and retained for 6 hours
+    - type: file
+      threshold: DEBUG
+      currentLogFilename: ./logs/debug.log
+      archivedLogFilenamePattern: ./logs/debug-%d{yyyy-MM-dd-hh}.log.gz
+      archivedFileCount: 6
