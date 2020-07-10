@@ -25,6 +25,8 @@ logging:
   # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
   # Logback's Fixed Window Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%i.log.gz
   appenders:
+    - type: console
+
     # Log warnings and errors to stderr
     - type: console
       threshold: WARN
@@ -35,8 +37,8 @@ logging:
     - type: file
       threshold: INFO
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: /logs/application.log
-      archivedLogFilenamePattern: /logs/application-%d{yyyy-MM-dd}-%i.log.gz
+      currentLogFilename: ./logs/application.log
+      archivedLogFilenamePattern: ./logs/application-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
       maxFileSize: 10MiB
 
@@ -45,5 +47,5 @@ logging:
     - type: file
       threshold: DEBUG
       currentLogFilename: ./logs/debug.log
-      archivedLogFilenamePattern: ./logs/debug-%d{yyyy-MM-dd-hh}.log.gz
+      archivedLogFilenamePattern: ./logs/debug-%d{yyyy-MM-dd-HH}.log.gz
       archivedFileCount: 6
