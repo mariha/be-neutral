@@ -3,6 +3,7 @@ package pl.wanderers.footprint.resources;
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.jersey.caching.CacheControl;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,7 @@ import pl.wanderers.footprint.api.Greetings;
 import pl.wanderers.footprint.core.Template;
 
 @Path("/hello-world")
+@Api
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
 

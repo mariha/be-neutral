@@ -3,6 +3,8 @@ package pl.wanderers.footprint;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 import pl.wanderers.footprint.health.TemplateHealthCheck;
 import pl.wanderers.footprint.resources.HelloWorldResource;
@@ -20,7 +22,12 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<BeNeutralConfiguration> bootstrap) {
-        // TODO: application initialization
+        bootstrap.addBundle(new SwaggerBundle<BeNeutralConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(BeNeutralConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override

@@ -12,6 +12,9 @@ server:
         archivedLogFilenamePattern: ./logs/requests-%d.log.gz
         archivedFileCount: 7
 
+swagger:
+  resourcePackage: pl.wanderers.footprint.resources
+
 logging:
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
   level: INFO

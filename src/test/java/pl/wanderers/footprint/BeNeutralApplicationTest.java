@@ -19,6 +19,9 @@ import pl.wanderers.footprint.api.Greetings;
 import static io.restassured.RestAssured.given;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class BeNeutralApplicationTest {
@@ -58,7 +61,32 @@ public class BeNeutralApplicationTest {
         // log file exists, but also contains the log line that jetty prints on startup
         final Path log = Paths.get("./logs/application.log");
         assertThat(log).exists();
-        final String actual = Files.readString(log, UTF_8);
+        final String actual = new String(Files.readAllBytes(log), UTF_8);
         assertThat(actual).contains("0.0.0.0:" + APP_EXT.getLocalPort());
+    }
+
+    @IntegrationTest
+    public void swaggerIsAvailable() {
+        given()
+        .when()
+            .get("/swagger.json")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("paths./hello-world.get.operationId", equalTo("sayHello"))
+            .body("definitions.Greetings", not(nullValue()));
+
+        given()
+        .when()
+            .get("/swagger")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("html.head.title", equalTo("Swagger UI"));
+
+        given()
+        .when()
+            .get("/swagger/")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("html.head.title", equalTo("Swagger UI"));
     }
 }

@@ -2,6 +2,7 @@ package pl.wanderers.footprint;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -13,6 +14,9 @@ public class BeNeutralConfiguration extends Configuration {
 
     @NotEmpty
     private String defaultName = "Stranger";
+
+    @JsonProperty("swagger")
+    public SwaggerBundleConfiguration swaggerBundleConfiguration;
 
     @JsonProperty
     public String getTemplate() {

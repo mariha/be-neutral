@@ -1,6 +1,9 @@
 template: Hello, %s!
 defaultName: Stranger
 
+swagger:
+  resourcePackage: pl.wanderers.footprint.resources
+
 # Logging settings.
 logging:
   level: DEBUG
