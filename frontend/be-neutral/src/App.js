@@ -52,7 +52,7 @@ function App() {
             minWidth: '350px'
           }}
         />
-        <button onClick={()=> console.log('click')}>Start the balancing art</button>
+        <button onClick={() => console.log('click')}>Start the balancing art</button>
       </section>
 
       <section className="main-section">
@@ -88,6 +88,20 @@ function App() {
           })}
         </ol>
       </section>
+
+      <section class="main-section">
+        <p>
+          <span id="ref1">1.&nbsp;<a href="https://www.nature.org/en-us/get-involved/how-to-help/carbon-footprint-calculator/">The Nature Conservancy Carbon Footprint Calculator</a></span>
+          <span id="ref2">2.&nbsp;Copenhagen: Solutions For Sustainable Cities, 2014, p. 38</span>
+          <span id="ref3">3.&nbsp;<a href="https://drawdown.org/solutions/building-retrofitting">Project Drawdown - Building retrofitting</a></span>
+          <span id="ref4">4.&nbsp;<a href="https://www.arborday.org/calculator/">The Arbor Day Foundation's Tree Benefit Calculator</a></span>
+        </p>
+        <p style={{ color: 'grey' }}>TODO: maybe include water consumption - as a matter of running out of resources rather than global warming.</p>
+      </section>
+
+
+
+
     </div>
   );
 }
