@@ -1,12 +1,19 @@
 template: Hello, %s!
 defaultName: Stranger
 
+databaseUrl: "https://your-cloudant-url-bluemix.cloudantnosqldb.appdomain.cloud"
+iamKey: "your-aim-key"
+dbName: be-neutral
+
 swagger:
   resourcePackage: pl.wanderers.footprint.resources
 
 # Logging settings.
 logging:
   level: DEBUG
+  loggers:
+    org.reflections.Reflections: ERROR
+
   appenders:
     - type: console
       threshold: INFO
