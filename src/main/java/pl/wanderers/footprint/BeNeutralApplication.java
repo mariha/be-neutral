@@ -1,6 +1,8 @@
 package pl.wanderers.footprint;
 
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
@@ -26,6 +28,12 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<BeNeutralConfiguration> bootstrap) {
+        // Enable variable substitution with environment variables
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(
+                        bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(true)));
+
         bootstrap.addBundle(new SwaggerBundle<BeNeutralConfiguration>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(BeNeutralConfiguration configuration) {
@@ -49,6 +57,7 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
         final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.buildTemplate());
         environment.healthChecks().register("template", healthCheck);
         environment.healthChecks().register("cloudant", new CloudantHealthCheck(dbService));
+
     }
 
 }

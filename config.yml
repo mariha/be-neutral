@@ -1,8 +1,8 @@
 template: Hello, %s!
 defaultName: Stranger
 
-databaseUrl: "https://your-cloudant-url-bluemix.cloudantnosqldb.appdomain.cloud"
-iamKey: "your-aim-key"
+databaseUrl: ${IBM_DB_URL}
+iamKey: ${IBM_IAM_KEY}
 dbName: be-neutral
 
 server:
