@@ -69,7 +69,7 @@ public class BeNeutralApplicationTest {
     public void swaggerIsAvailable() {
         given()
         .when()
-            .get("/swagger.json")
+            .get("api/swagger.json")
         .then()
             .statusCode(HttpStatus.OK_200)
             .body("paths./hello-world.get.operationId", equalTo("sayHello"))
@@ -77,14 +77,14 @@ public class BeNeutralApplicationTest {
 
         given()
         .when()
-            .get("/swagger")
+            .get("api/swagger")
         .then()
             .statusCode(HttpStatus.OK_200)
             .body("html.head.title", equalTo("Swagger UI"));
 
         given()
         .when()
-            .get("/swagger/")
+            .get("api/swagger/")
         .then()
             .statusCode(HttpStatus.OK_200)
             .body("html.head.title", equalTo("Swagger UI"));
