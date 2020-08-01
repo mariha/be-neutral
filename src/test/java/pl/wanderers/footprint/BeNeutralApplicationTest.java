@@ -44,7 +44,7 @@ public class BeNeutralApplicationTest {
             given()
                 .formParam("name", name.get())
             .when()
-                .get("hello-world")
+                .get("api/hello-world")
             .then()
                 //.log().all()
                 .statusCode(HttpStatus.OK_200)
