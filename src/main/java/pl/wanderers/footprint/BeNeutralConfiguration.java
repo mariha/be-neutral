@@ -9,14 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import pl.wanderers.footprint.core.Template;
 
 public class BeNeutralConfiguration extends Configuration {
-    @NotEmpty
-    private String template;
-
-    @NotEmpty
-    private String defaultName = "Stranger";
 
     @NotEmpty
     @org.hibernate.validator.constraints.URL
@@ -32,30 +26,6 @@ public class BeNeutralConfiguration extends Configuration {
 
     @JsonProperty("swagger")
     public SwaggerBundleConfiguration swaggerBundleConfiguration;
-
-    @JsonProperty
-    public String getTemplate() {
-        return template;
-    }
-
-    @JsonProperty
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public Template buildTemplate() {
-        return new Template(template, defaultName);
-    }
-
-    @JsonProperty
-    public String getDefaultName() {
-        return defaultName;
-    }
-
-    @JsonProperty
-    public void setDefaultName(String name) {
-        this.defaultName = name;
-    }
 
     @JsonProperty
     public URL getDatabaseUrl() {

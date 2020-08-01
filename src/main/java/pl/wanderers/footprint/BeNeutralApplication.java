@@ -12,8 +12,6 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import pl.wanderers.footprint.db.DatabaseService;
 import pl.wanderers.footprint.db.SolutionDAO;
 import pl.wanderers.footprint.health.CloudantHealthCheck;
-import pl.wanderers.footprint.health.TemplateHealthCheck;
-import pl.wanderers.footprint.resources.HelloWorldResource;
 import pl.wanderers.footprint.resources.SolutionsResource;
 
 public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
@@ -24,7 +22,7 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "BeNeutral";
     }
 
     @Override
@@ -51,16 +49,10 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
         DatabaseService dbService = new DatabaseService(configuration);
         SolutionDAO solutionDAO = new SolutionDAO(dbService);
 
-        final HelloWorldResource resource = new HelloWorldResource(configuration.buildTemplate());
-        environment.jersey().register(resource);
-
         SolutionsResource solutions = new SolutionsResource(solutionDAO);
         environment.jersey().register(solutions);
 
-        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.buildTemplate());
-        environment.healthChecks().register("template", healthCheck);
         environment.healthChecks().register("cloudant", new CloudantHealthCheck(dbService));
-
     }
 
 }

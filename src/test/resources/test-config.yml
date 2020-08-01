@@ -1,5 +1,3 @@
-template: Hello, %s!
-defaultName: Stranger
 
 databaseUrl: ${IBM_DB_URL}
 iamKey: ${IBM_IAM_KEY}
