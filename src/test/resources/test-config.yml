@@ -5,6 +5,9 @@ databaseUrl: ${IBM_DB_URL}
 iamKey: ${IBM_IAM_KEY}
 dbName: be-neutral
 
+server:
+  rootPath: /api
+
 swagger:
   resourcePackage: pl.wanderers.footprint.resources
 

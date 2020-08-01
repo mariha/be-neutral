@@ -89,4 +89,21 @@ public class BeNeutralApplicationTest {
             .statusCode(HttpStatus.OK_200)
             .body("html.head.title", equalTo("Swagger UI"));
     }
+
+    @IntegrationTest
+    public void staticContentIsAvailable() {
+        given()
+        .when()
+            .get("/")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("html.head.title", equalTo("Be Neutral"));
+
+        given()
+        .when()
+            .get("/index.html")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("html.head.title", equalTo("Be Neutral"));
+    }
 }

@@ -1,6 +1,7 @@
 package pl.wanderers.footprint;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
@@ -40,6 +41,8 @@ public class BeNeutralApplication extends Application<BeNeutralConfiguration> {
                 return configuration.swaggerBundleConfiguration;
             }
         });
+
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"));
     }
 
     @Override

@@ -13,10 +13,11 @@ How to start the BeNeutral application
 1. Start application with `java -jar target/be-neutral-1.0-SNAPSHOT.jar server config.yml` \
     Alternatively, you can build a docker image and run the API server in a container: \
     `docker build . -t be-neutral` \
-    `docker run -p 8080:8080 -p 8081:8081 be-neutral`
-1. To check that the application is running enter url `http://localhost:8080/api/v1/` \
-    (wait for BeNeutral banner in the log)
+    `docker run -p 8080:8080 -p 8081:8081 be-neutral` \
+    (either way, the BeNeutral banner in the log indicates the server is up)
+1. To check that the application is running enter url `http://localhost:8080/api/v1/`
 1. You can find api documentation at `http://localhost:8080/api/v1/swagger`
+1. The front page can be found under `http://localhost:8080/`
 
 Health Check
 -------------------
