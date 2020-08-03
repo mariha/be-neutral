@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 
-import pl.wanderers.footprint.api.Greetings;
+import pl.wanderers.footprint.core.Solution;
 
 import static io.restassured.RestAssured.given;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
@@ -72,8 +72,8 @@ public class BeNeutralApplicationTest {
             .get("api/swagger.json")
         .then()
             .statusCode(HttpStatus.OK_200)
-            .body("paths./hello-world.get.operationId", equalTo("sayHello"))
-            .body("definitions.Greetings", not(nullValue()));
+            .body("basePath", equalTo("/api"))
+            .body("schemes", contains("http"));
 
         given()
         .when()
@@ -88,6 +88,19 @@ public class BeNeutralApplicationTest {
         .then()
             .statusCode(HttpStatus.OK_200)
             .body("html.head.title", equalTo("Swagger UI"));
+    }
+
+    @IntegrationTest
+    public void swaggerDocumentsSolutionsAPI() {
+        given()
+        .when()
+            .get("api/swagger.json")
+        .then()
+            .statusCode(HttpStatus.OK_200)
+            .body("paths.'/solutions'.get.operationId", equalTo("listSolutions"))
+            .body("paths.'/solutions'.post.operationId", equalTo("addSolution"))
+            .body("paths.'/solutions/{solution-id}'.get.operationId", equalTo("getSolution"))
+            .body("definitions.Solution", not(nullValue()));
     }
 
     @IntegrationTest

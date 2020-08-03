@@ -17,7 +17,7 @@ import java.util.List;
 import pl.wanderers.footprint.core.Solution;
 import pl.wanderers.footprint.db.SolutionDAO;
 
-@Path("/solutions")
+@Path("solutions")
 @Produces(MediaType.APPLICATION_JSON)
 @Api
 public class SolutionsResource {
@@ -37,7 +37,7 @@ public class SolutionsResource {
 
     @GET
     @Path("/{solution-id}")
-    public Solution get(@PathParam("solution-id") long solutionId) {
+    public Solution getSolution(@PathParam("solution-id") long solutionId) {
         String message = String.format("Solution with id=%d does not exist.", solutionId);
         return solutionsDAO.findById(solutionId)
                 .orElseThrow(() -> new NotFoundException(message));
