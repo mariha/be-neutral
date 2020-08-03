@@ -37,24 +37,6 @@ public class BeNeutralApplicationTest {
     }
 
     @IntegrationTest
-    public void testHelloWorld() {
-        final Optional<String> name = Optional.of("Dr. IntegrationTest");
-
-        final Greetings saying =
-            given()
-                .formParam("name", name.get())
-            .when()
-                .get("api/hello-world")
-            .then()
-                //.log().all()
-                .statusCode(HttpStatus.OK_200)
-                .extract()
-                .as(Greetings.class);
-
-        assertThat(saying.getContent()).isEqualTo(APP_EXT.getConfiguration().buildTemplate().render(name));
-    }
-
-    @IntegrationTest
     public void testLogFileWritten() throws IOException {
         // The log file is using a size and time based policy, which used to silently
         // fail (and not write to a log file). This test ensures not only that the
