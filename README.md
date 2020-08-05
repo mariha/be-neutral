@@ -4,12 +4,14 @@ BeNeutral
 
 A tool to calculate CO2 emitted by a house, advise how to reduce it, and encourages to offset the rest by planting trees.
 
+The project is temporarily hosted under: http://www.beNeutral.wanderers.pl/
+
 How to start the BeNeutral application
 -------------------------
 
 1. You will need IBM Cloudant database credentials. \
     Put your url and iamKey in `/config.yml` and `/src/test/resources/test-config.yml`
-1. Run `mvn clean install` to build your application
+1. Run `mvn clean package` to build your application
 1. Start application with `java -jar target/be-neutral-1.0-SNAPSHOT.jar server config.yml` \
     Alternatively, you can build a docker image and run the API server in a container: \
     `docker build . -t be-neutral` \
