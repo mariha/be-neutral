@@ -1,0 +1,7 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# default owner unless someone following matches and takes precedence
+*   @mariha
+
+# owns everything in frontend and its subdirs
+/frontend/ @pawel3ala
