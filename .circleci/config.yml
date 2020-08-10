@@ -57,10 +57,9 @@ jobs:
       - run:
           name: "Building and verifying docker image"
           command: |
-                     docker build . -t $IMAGE_NAME:$TAG
-            # Start service and check that it’s running
-                     docker run -d --name be-neutral $IMAGE_NAME:$TAG
-                     docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
+            docker build . -t $IMAGE_NAME:$TAG
+            docker run -d --name be-neutral $IMAGE_NAME:$TAG
+            docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
 
       - run:
           name: "Publishing docker image"
