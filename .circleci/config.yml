@@ -51,8 +51,7 @@ jobs:
           name: "Storing logs"
           path: logs
 
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
 
       - run:
           name: "Building and verifying docker image"
