@@ -57,7 +57,8 @@ jobs:
           name: "Building and verifying docker image"
           command: |
             docker build . -t $IMAGE_NAME:$TAG
-            docker run -d --name be-neutral $IMAGE_NAME:$TAG
+            docker run -it -d -p 8080:8080 --name be-neutral $IMAGE_NAME:$TAG
+            docker ps
             docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
 
       - run:
