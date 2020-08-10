@@ -13,6 +13,9 @@ jobs:
     working_directory: ~/repo
 
     environment:
+      IMAGE_NAME: marihak/be-neutral
+      TAG: latest  # 0.1.$CIRCLE_BUILD_NUM
+
       # JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
@@ -33,16 +36,34 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # Run tests!
-      - run: mvn verify -Dsurefire.useSystemClassLoader=false -Dfailsafe.useSystemClassLoader=false
+      - run:
+          name: "Running tests!"
+          command: mvn verify -Dsurefire.useSystemClassLoader=false -Dfailsafe.useSystemClassLoader=false
 
       - store_test_results:
           path: target/test-results
 
       - store_artifacts:
-          name: Storing test results
+          name: "Storing test results"
           path: target/test-results
           destination: test-results
       - store_artifacts:
-          name: Storing logs
+          name: "Storing logs"
           path: logs
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run:
+          name: "Building and verifying docker image"
+          command: |
+                     docker build . -t $IMAGE_NAME:$TAG
+            # Start service and check that it’s running
+                     docker run -d --name be-neutral $IMAGE_NAME:$TAG
+                     docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
+
+      - run:
+          name: "Publishing docker image"
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push $IMAGE_NAME:$TAG

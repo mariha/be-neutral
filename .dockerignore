@@ -1,0 +1,5 @@
+# any files or directories starting with a '.'
+.*
+logs/
+frontend/
+images/
