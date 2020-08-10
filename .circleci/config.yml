@@ -8,7 +8,6 @@ jobs:
     docker:
       - image: circleci/openjdk:11-jdk # primary container
       # Service dependencies documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/buildpack-deps:curl
       # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
@@ -55,15 +54,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: "Building and verifying docker image"
+          name: "Building and publishing docker image"
           command: |
             docker build . -t $IMAGE_NAME:$TAG
-            docker run -it -d -p 8080:8080 --name be-neutral $IMAGE_NAME:$TAG
-            docker ps
-            docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
-
-      - run:
-          name: "Publishing docker image"
-          command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_NAME:$TAG
