@@ -4,7 +4,7 @@ BeNeutral
 
 A tool to calculate CO2 emitted by a house, advise how to reduce it, and encourages to offset the rest by planting trees.
 
-The project is temporarily hosted under: http://www.beNeutral.wanderers.pl/
+http://www.beNeutral.eu
 
 How to start the BeNeutral application
 -------------------------

@@ -48,10 +48,10 @@ jobs:
           name: "Storing logs"
           path: logs
 
-  publish-latest:
+  publish-docker-image:
     environment:
       IMAGE_NAME: be-neutral
-      TAG: latest  # $CIRCLE_BRANCH
+      TAG: $CIRCLE_BRANCH
       # To be set outside of this file:
       # $DOCKER_USER
       # $DOCKER_PASS
@@ -70,16 +70,17 @@ jobs:
       - run:
           name: "Building and publishing docker image"
           command: |
-            docker build . -t $DOCKER_USER/$IMAGE_NAME:$TAG
+            export IMAGE_FULL_NAME = $DOCKER_USER/$IMAGE_NAME
+            docker build . -t $IMAGE_FULL_NAME -t $IMAGE_FULL_NAME:$TAG
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push $DOCKER_USER/$IMAGE_NAME:$TAG
+            docker push $IMAGE_FULL_NAME
 
 workflows:
   version: 2
   build:
     jobs:
       - run-tests
-      - publish-latest:
+      - publish-docker-image:
           requires:
             - run-tests
           filters:
