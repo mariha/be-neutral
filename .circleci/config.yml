@@ -70,7 +70,7 @@ jobs:
       - run:
           name: "Building and publishing docker image"
           command: |
-            export IMAGE_FULL_NAME = $DOCKER_USER/$IMAGE_NAME
+            IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME
             docker build . -t $IMAGE_FULL_NAME -t $IMAGE_FULL_NAME:$TAG
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_FULL_NAME
