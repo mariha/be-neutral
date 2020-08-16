@@ -3,6 +3,15 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2.1
+
+parameters:
+  publish-docker-image:
+    type: boolean
+    default: true
+  image-tag:
+    type: string
+    default: << pipeline.git.branch >>
+
 jobs:
   run-tests:
     docker:
@@ -51,7 +60,7 @@ jobs:
   publish-docker-image:
     environment:
       IMAGE_NAME: be-neutral
-      TAG: $CIRCLE_BRANCH
+      TAG: << pipeline.parameters.image-tag >>
       # To be set outside of this file:
       # $DOCKER_USER
       # $DOCKER_PASS
@@ -70,8 +79,8 @@ jobs:
       - run:
           name: "Building and publishing docker image"
           command: |
-            IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME
-            docker build . -t $IMAGE_FULL_NAME -t $IMAGE_FULL_NAME:$TAG
+            IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME:$TAG
+            docker build . -t $IMAGE_FULL_NAME
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_FULL_NAME
 
@@ -81,5 +90,16 @@ workflows:
     jobs:
       - run-tests
       - publish-docker-image:
+          when: << pipeline.parameters.publish-docker-image >>
           requires:
             - run-tests
+          pre-steps:
+            run: export TAG="test"
+      - publish-docker-image:
+          when:
+            equal: [ master, << pipeline.git.branch >> ]
+          requires:
+            - run-tests
+          pre-steps:
+            run: export TAG="latest"
+
