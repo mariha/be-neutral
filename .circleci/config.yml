@@ -94,12 +94,12 @@ workflows:
           requires:
             - run-tests
           pre-steps:
-            run: export TAG="test"
+            - run: export TAG="test"
       - publish-docker-image:
           when:
             equal: [ master, << pipeline.git.branch >> ]
           requires:
             - run-tests
           pre-steps:
-            run: export TAG="latest"
+            - run: export TAG="latest"
 
