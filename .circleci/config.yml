@@ -56,7 +56,7 @@ jobs:
       # $DOCKER_USER
       # $DOCKER_PASS
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: circleci/openjdk:11-jdk
 
     working_directory: ~/repo
 
@@ -83,6 +83,3 @@ workflows:
       - publish-docker-image:
           requires:
             - run-tests
-          filters:
-            branches:
-              only: master
