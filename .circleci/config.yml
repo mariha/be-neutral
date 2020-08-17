@@ -93,7 +93,7 @@ workflows:
       - publish-docker-image:
           when:
             or:
-              equal: [ master, << pipeline.git.branch >> ]
-              << pipeline.parameters.publish-docker-image >>
+              - equal: [ master, << pipeline.git.branch >> ]
+              - << pipeline.parameters.publish-docker-image >>
           requires:
             - run-tests
