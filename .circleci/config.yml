@@ -90,7 +90,9 @@ workflows:
 
   build-only:
     unless:
-      equal: [ master, << pipeline.git.branch >> ]
+      or:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - << pipeline.parameters.publish-docker-image >>
     jobs:
       - run-tests
 
