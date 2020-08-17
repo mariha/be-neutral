@@ -7,10 +7,10 @@ version: 2.1
 parameters:
   publish-docker-image:
     type: boolean
-    default: false
+    default: true
   image-tag:
     type: string
-    default: << pipeline.git.branch >>
+    default: "test" # << pipeline.git.branch >>
 
 jobs:
   run-tests:
