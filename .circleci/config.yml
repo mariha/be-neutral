@@ -85,6 +85,13 @@ jobs:
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_FULL_NAME
 
+      - run:
+          name: "Start service and check that it’s running"
+          command: |
+            docker run -it -d -p 8080:8080 --name be-neutral $DOCKER_USER/$IMAGE_NAME
+            docker ps
+            docker exec be-neutral curl --retry 10 --retry-connrefused http://localhost:8080
+
 workflows:
   version: 2.1
   build-only:
