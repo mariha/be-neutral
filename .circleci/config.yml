@@ -95,5 +95,5 @@ workflows:
     jobs:
       - run-tests
       - publish-docker-image:
-        requires:
-          - run-tests
+          requires:
+            - run-tests
