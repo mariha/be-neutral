@@ -79,27 +79,21 @@ jobs:
       - run:
           name: "Building and publishing docker image"
           command: |
-            IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME:$TAG
-            docker build . -t $IMAGE_FULL_NAME
+            IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME
+            IMAGE_ID=$(docker build . -q -t $IMAGE_FULL_NAME)
+            docker tag $IMAGE_ID $IMAGE_FULL_NAME:$TAG
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_FULL_NAME
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - run-tests
       - publish-docker-image:
-          when: << pipeline.parameters.publish-docker-image >>
-          requires:
-            - run-tests
-          pre-steps:
-            - run: export TAG="test"
-      - publish-docker-image:
           when:
-            equal: [ master, << pipeline.git.branch >> ]
+            or:
+              equal: [ master, << pipeline.git.branch >> ]
+              << pipeline.parameters.publish-docker-image >>
           requires:
             - run-tests
-          pre-steps:
-            - run: export TAG="latest"
-
