@@ -9,17 +9,17 @@ http://www.beNeutral.eu
 How to start the BeNeutral application
 -------------------------
 
-1. You will need IBM Cloudant database credentials. \
-    `export IBM_DB_URL=your-cloudant-db-url` \
-    `export IBM_IAM_KEY=your-ibm-iam-key` \
-    alternatively, put your url and iamKey directly in `/config.yml` and `/src/test/resources/test-config.yml` 
-    
+1. You will need IBM Cloudant database credentials. The app config file expects them as the environment variables.
+   ```
+    export IBM_DB_URL=your-cloudant-db-url
+    export IBM_IAM_KEY=your-ibm-iam-key
+   ```
 1. To run the application, you can either build and run it in your env or run it in a container. Either way, the BeNeutral banner in the log indicates the server is up.
     * Un-containerized app server
         1. Run `mvn package` to build the application
         1. Start application with `java -jar target/be-neutral-1.0-SNAPSHOT.jar server config.yml`
     * Run the server in a docker container, using the latest image from the master branch, published to dockerhub: \
-        `docker run -p 8080:8080 -p 8081:8081 marihak/be-neutral`
+        `docker run -p 8080:8080 -p 8081:8081 -e IBM_IAM_KEY -e IBM_DB_URL marihak/be-neutral`
 
 1. To check that the application is running enter url `http://localhost:8080/api/v1/`
 1. You can find api documentation at `http://localhost:8080/api/v1/swagger`
