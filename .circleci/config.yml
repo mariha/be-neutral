@@ -87,11 +87,18 @@ jobs:
 
 workflows:
   version: 2.1
-  build:
-    #    when:
-    #      or:
-    #        - equal: [ master, << pipeline.git.branch >> ]
-    #        - << pipeline.parameters.publish-docker-image >>
+  build-only:
+    unless:
+      or:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - << pipeline.parameters.publish-docker-image >>
+    jobs:
+      - run-tests
+  build-deploy:
+    when:
+      or:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - << pipeline.parameters.publish-docker-image >>
     jobs:
       - run-tests
       - publish-docker-image:
