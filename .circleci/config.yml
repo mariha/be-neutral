@@ -7,10 +7,10 @@ version: 2.1
 parameters:
   publish-docker-image:
     type: boolean
-    default: true
+    default: false
   image-tag:
     type: string
-    default: "test" # << pipeline.git.branch >>
+    default: << pipeline.git.branch >> # "test"
 
 jobs:
   run-tests:
@@ -105,7 +105,7 @@ workflows:
         - << pipeline.parameters.publish-docker-image >>
     jobs:
       - run-tests
-  build-deploy:
+  build-dockerize:
     when:
       or:
         - equal: [ master, << pipeline.git.branch >> ]
