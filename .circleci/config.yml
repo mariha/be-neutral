@@ -77,20 +77,24 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: "Building and publishing docker image"
+          name: "Building docker image"
           command: |
             IMAGE_FULL_NAME=$DOCKER_USER/$IMAGE_NAME
             IMAGE_ID=$(docker build . -q -t $IMAGE_FULL_NAME)
             docker tag $IMAGE_ID $IMAGE_FULL_NAME:$TAG
-            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push $IMAGE_FULL_NAME
 
       - run:
-          name: "Start service and check that it’s running"
+          name: "Starting the service and checking that it’s running"
           command: |
             echo $IBM_DB_URL
             docker run -it -d -p 8080:8080 -e IBM_IAM_KEY -e IBM_DB_URL --name be-neutral $DOCKER_USER/$IMAGE_NAME
             docker exec be-neutral curl -4 --retry 10 --retry-connrefused http://localhost:8080
+
+      - run:
+          name: "Publishing docker image"
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push $DOCKER_USER/$IMAGE_NAME
 
 workflows:
   version: 2.1
