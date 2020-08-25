@@ -15,17 +15,22 @@ function App() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/otherpage">Any other page</Link>
-          </li>
-        </ul>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/otherpage">Any other page</Link>
+            </li>
+          </ul>
+        </div>
+        <div >
+          This navbar is for testing purposes only - to be deleted
+        </div>
 
         <hr />
 
