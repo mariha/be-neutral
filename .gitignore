@@ -2,3 +2,4 @@ target/
 logs/
 .idea/
 *.iml
+frontend/be-neutral/node_modules
