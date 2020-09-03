@@ -6,6 +6,11 @@ A tool to calculate CO2 emitted by a house, advise how to reduce it, and encoura
 
 http://www.beNeutral.eu
 
+Community
+------------------
+
+To ask questions regarding contributing, share thoughts, feedback or really anything project related, please [join us on Slack](https://join.slack.com/t/co2-neutral/shared_invite/zt-h6klbvbo-8lifcdKDnr7ysmycG9TuJw) or during our [virtual office hours on Zoom](https://calendar.google.com/calendar/embed?src=uhc6qd6itv1789615oq29c2k98%40group.calendar.google.com&ctz=America%2FChicago).
+
 How to start the BeNeutral application
 -------------------------
 
