@@ -3,6 +3,8 @@
 <head>
     <title>Be Neutral</title>
 
+  	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width, user-scalable=0">
     <meta name="description"
@@ -126,5 +128,50 @@
     </a>
 </section>
 
+ <form action="https://hooks.slack.com/services/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" id="subscribeForm">
+   <div class="container">
+     <h2>Subscribe, dear future user</h2>
+     <p>We are in progress, if you'd like to be one of the first users to test our platform, please let us know by leaving your email address: e-mail@somewhere.com.</p>
+   </div>
+
+   <div class="container" style="background-color:white">
+     <input type="text" placeholder="Email address" name="email_address" required>
+   </div>
+
+   <div class="container">
+     <input type="submit" value="Subscribe">
+   </div>
+ </form>
+ <!-- the result of the search will be rendered inside this div -->
+ <div id="result">
+
+ </div>
+ 
+
 </body>
+
+<script>
+// Attach a submit handler to the form
+$( "#subscribeForm" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $( this ), email = $form.find( "input[name='email_address']" ).val(), url = $form.attr( "action" );
+  
+  $.ajax({
+      url: url,
+      data: '{"text": "' + email + '"}',
+      type: "POST"
+  })
+      .done(function (reply) {
+		  $( "#result" ).empty().append( "Thank you for your subscription!");
+      })
+      .fail(function (xhr, status, errorThrown) {
+		  $( "#result" ).empty().append("Failed to subscribe. Try again later, please.");
+      })
+});
+</script>
+
 </html>
