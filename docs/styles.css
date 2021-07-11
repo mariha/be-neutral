@@ -1,0 +1,18 @@
+body {
+  color: #4a4a4a;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.main-section {
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 960px;
+  padding: 60px 40px;
+  text-align: center;
+  width: 100%;
+}
